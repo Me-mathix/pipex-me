@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 22:20:08 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/01/12 00:50:01 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:52:58 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ void init_pipex(t_pipex *data, char **argv, char **envp)
 	if (!data->path_cmd1)
 		ft_explosion(data, 2);
 	data->path_cmd2 = is_valid_path(data->cmd2[0], data->path);
-	ft_putendl_fd(data->path_cmd2, 1);
 	if (!data->path_cmd2)
 		ft_explosion(data, 3);
-	data->infile = open(argv[1], O_RDONLY);
-	data->outfile = open(argv[4], O_RDWR);
+	data->infile = open(argv[1], O_RDONLY, 0777);
+	data->outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (data->infile < 0 || data->outfile < 0)
 		ft_explosion(data, 4);
 }
